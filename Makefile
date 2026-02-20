@@ -37,7 +37,7 @@ test-fast:
 
 train:
 	@mkdir -p $(MODEL_DIR)
-	$(PYTHON) -m churn_predictor.models.trainer \
+	.venv/bin/churn-train \
 		--data-path $(DATA_DIR)/churn.csv \
 		--model-out $(MODEL_DIR)/xgb_churn.joblib
 
