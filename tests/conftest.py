@@ -56,7 +56,7 @@ def trained_artifact(
     df_engineered = engineer.transform(raw_churn_df)
 
     preprocessor = ChurnPreprocessor()
-    X, y = preprocessor.fit_transform(df_engineered)  # noqa: N806
+    X, y = preprocessor.fit_transform(df_engineered)
 
     model = XGBClassifier(n_estimators=5, max_depth=2, random_state=42)
     model.fit(X, y)

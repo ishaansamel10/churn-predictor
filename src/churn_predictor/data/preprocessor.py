@@ -88,7 +88,7 @@ class ChurnPreprocessor:
         self, df: pd.DataFrame
     ) -> tuple[pd.DataFrame, pd.Series]:
         y = df[TARGET_COLUMN].astype(int)
-        X = df.drop(columns=[TARGET_COLUMN] + DROP_COLUMNS, errors="ignore")
+        X = df.drop(columns=[TARGET_COLUMN, *DROP_COLUMNS], errors="ignore")
         return X, y
 
     def _build_transformer(self) -> ColumnTransformer:

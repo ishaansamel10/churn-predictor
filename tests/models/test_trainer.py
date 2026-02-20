@@ -12,13 +12,15 @@ from churn_predictor.models.trainer import ChurnModelTrainer
 
 
 def test_train_returns_xgb_classifier(raw_churn_df) -> None:
-    trainer = ChurnModelTrainer(params={"n_estimators": 3, "max_depth": 2, "random_state": 42})
+    params = {"n_estimators": 3, "max_depth": 2, "random_state": 42}
+    trainer = ChurnModelTrainer(params=params)
     model = trainer.train(raw_churn_df, eval_fraction=0.2)
     assert isinstance(model, XGBClassifier)
 
 
 def test_save_and_load(raw_churn_df, tmp_path: Path) -> None:
-    trainer = ChurnModelTrainer(params={"n_estimators": 3, "max_depth": 2, "random_state": 42})
+    params = {"n_estimators": 3, "max_depth": 2, "random_state": 42}
+    trainer = ChurnModelTrainer(params=params)
     trainer.train(raw_churn_df, eval_fraction=0.2)
     save_path = tmp_path / "model.joblib"
     trainer.save(save_path)
@@ -31,5 +33,5 @@ def test_save_and_load(raw_churn_df, tmp_path: Path) -> None:
 
 def test_save_before_train_raises() -> None:
     trainer = ChurnModelTrainer()
-    with pytest.raises(RuntimeError, match="Call train()"):
+    with pytest.raises(RuntimeError, match=r"Call train\(\)"):
         trainer.save("/tmp/should_not_exist.joblib")

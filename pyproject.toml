@@ -59,6 +59,8 @@ select = [
 ]
 ignore = [
     "S101",    # allow assert in tests
+    "N803",    # uppercase X argument is standard ML convention for feature matrices
+    "N806",    # uppercase X variable is standard ML convention for feature matrices
 ]
 
 [tool.ruff.lint.per-file-ignores]

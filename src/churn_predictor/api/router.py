@@ -108,7 +108,7 @@ def _run_prediction(
     )
 
     row_engineered = engineer.transform(row)
-    X = preprocessor.transform(row_engineered)  # noqa: N806
+    X = preprocessor.transform(row_engineered)
 
     proba = float(model.predict_proba(X)[0, 1])
     threshold = 0.5
